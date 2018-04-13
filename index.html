@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>My Bookmarks Page</title>
-	<link href="https://fonts.googleapis.com/css?family=Lato|Roboto:300" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="chota.min.css">
 	<style type="text/css">
 	:root {
@@ -14,9 +14,10 @@
 	  --font-family: "Roboto", sans-serif;
 	}
 	
-
 	nav{margin-bottom: 2rem}
-
+	#app{
+		background-color: white;
+	}
 	.loading{
 		position: fixed;
 		top: 0;
@@ -24,7 +25,7 @@
 		width: 100%;
 		height:100%;
 		background-color: white;
-		z-index: 9999;
+		z-index: 1000;
 	}
 
 	[m-mask] {
@@ -43,7 +44,7 @@
 	</style>
 </head>
 <body>
-	<!--<div class="loading is-center">LOADING</div>-->
+	<div id="loading" class="loading is-center">LOADING</div>
 	<div id="app" class="container" m-mask>
 		<nav class="nav topnav">
 		  <div class="nav-left">
@@ -61,6 +62,10 @@
 
 
 		<component m-literal:content="bookmarks.design"></component>	
+		<div id="html5DIV">
+      <h4>Or use Color Picker</h4>
+      <input type="color" id="colorPicker" value="#ff0000" class="outline is-full-width">
+    </div>
 			
 
 	</div>
@@ -105,11 +110,13 @@
 	    activeSection: 0,
 	    parentMsg: "Parent Data"
 	  },
-	  methods: {
-	    changeSection: function(i) {
-	      this.set('activeSection', i);
-	    }
-	  },
+	  hooks: {
+	    mounted: function() {
+	    	setTimeout(function(){
+	    		var l = document.getElementById("loading").classList.add("is-hidden");
+	    	},1000);
+	    },
+	  }
 	});
   </script>
 </body>
